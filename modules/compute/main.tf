@@ -1,7 +1,7 @@
 resource "aws_security_group" "web" {
-  name        = "${local.project_name}-web-sg"
+  name        = "terraform-project3-web-sg"
   description = "Security group for Project 3 web server"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "HTTP"
@@ -19,7 +19,19 @@ resource "aws_security_group" "web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.project_name}-web-sg"
-  })
+  tags = {
+    Name = "terraform-project3-web-sg"
+  }
+}
+
+resource "aws_instance" "web" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [aws_security_group.web.id]
+
+  tags = {
+    Name = "terraform-project3-web"
+  }
 }

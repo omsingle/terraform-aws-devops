@@ -16,14 +16,20 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_instance" "web" {
-  ami           = var.ami_id
+module "network" {
+  source = "./modules/network"
+
+  subnet_cidr       = var.subnet_cidr
+  availability_zone = var.availability_zone
+  vpc_cidr          = var.vpc_cidr
+}
+
+module "compute" {
+  source = "./modules/compute"
+
+  ami_id        = var.ami_id
   instance_type = var.instance_type
 
-  subnet_id              = aws_subnet.public.id
-  vpc_security_group_ids = [aws_security_group.web.id]
-
-  tags = merge(local.common_tags, {
-    Name = "${local.project_name}-web"
-  })
+  vpc_id    = module.network.vpc_id
+  subnet_id = module.network.public_subnet_id
 }

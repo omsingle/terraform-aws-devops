@@ -3,7 +3,7 @@ resource "aws_subnet" "public" {
   cidr_block              = var.subnet_cidr
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
-  tags = merge(local.common_tags, {
-    Name = "${local.project_name}-public-subnet"
-  })
+  tags = {
+  Name = "terraform-project3-public-subnet"
+}
 }
