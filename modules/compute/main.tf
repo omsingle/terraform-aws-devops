@@ -1,5 +1,5 @@
 resource "aws_security_group" "web" {
-  name        = "terraform-project3-web-sg"
+  name        = "terraform-project3-${var.environment}-web-sg"
   description = "Security group for Project 3 web server"
   vpc_id      = var.vpc_id
 
@@ -20,7 +20,7 @@ resource "aws_security_group" "web" {
   }
 
   tags = {
-    Name = "terraform-project3-web-sg"
+    Name = "terraform-project3-${var.environment}-web-sg"
   }
 }
 
@@ -32,6 +32,6 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.web.id]
 
   tags = {
-    Name = "terraform-project3-web"
+    Name = "terraform-project3-${var.environment}-web"
   }
 }

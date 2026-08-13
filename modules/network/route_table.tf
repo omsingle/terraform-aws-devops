@@ -5,7 +5,7 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
-    tags ={
-    Name = "terraform-project3-public-route-table"
-    }
+  tags = {
+    Name = "terraform-project3-${var.environment}-public-route-table"
+  }
 }

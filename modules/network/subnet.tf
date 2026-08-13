@@ -4,6 +4,6 @@ resource "aws_subnet" "public" {
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
-  Name = "terraform-project3-public-subnet"
-}
+    Name = "terraform-project3-${var.environment}-public-subnet"
+  }
 }

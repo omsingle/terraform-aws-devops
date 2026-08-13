@@ -1,0 +1,7 @@
+aws_region        = "us-east-1"
+ami_id            = "ami-0260fb21be1fd50db"
+instance_type     = "t3.small"
+vpc_cidr          = "10.1.0.0/16"
+subnet_cidr       = "10.1.1.0/24"
+availability_zone = "us-east-1c"
+environment = "prod"

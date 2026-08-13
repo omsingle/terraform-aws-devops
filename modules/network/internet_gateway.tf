@@ -2,6 +2,6 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "terraform-project3-igw"
+    Name = "terraform-project3-${var.environment}-igw"
   }
 }
