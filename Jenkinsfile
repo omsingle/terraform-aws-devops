@@ -18,24 +18,13 @@ pipeline {
         stage('Debug Environment') {
     steps {
         sh '''
-            echo "=== SHELL PROCESS ==="
+            echo "=== PIPELINE CONTAINER ==="
+            hostname
             echo "PID=$$"
             echo "PPID=$PPID"
-            echo "USER=$(whoami)"
-            echo "HOSTNAME=$(hostname)"
-            echo "ROOT=$(readlink /proc/$$/root)"
-            echo "EXE=$(readlink /proc/$$/exe)"
-            echo
 
-            echo "=== FILESYSTEM ==="
-            ls -ld /
-            ls -ld /usr
-            ls -ld /usr/bin
-            ls -l /usr/bin/terraform || true
-            echo
-
-            echo "=== MOUNTS ==="
-            cat /proc/$$/mountinfo | head -20
+            echo "Sleeping for 120 seconds..."
+            sleep 120
         '''
     }
 }
