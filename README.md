@@ -533,6 +533,25 @@ Possible future enhancements include:
 - Add Prometheus and Grafana monitoring
 
 ---
+## Project Screenshots
+
+### Jenkins Terraform CI/CD Pipeline
+
+The Jenkins pipeline successfully executes Terraform formatting, initialization, validation, planning, manual approval, and application.
+
+![Jenkins Pipeline](docs/screenshots/jenkins-pipeline.png)
+
+### Terraform Plan
+
+Terraform detects infrastructure changes and generates an execution plan before deployment.
+
+![Terraform Plan](docs/screenshots/terraform-plan.png)
+
+### Terraform Remote State in Amazon S3
+
+Terraform state is stored remotely in an Amazon S3 backend.
+
+![Terraform Remote State](docs/screenshots/s3-remote-state.png)
 
 ## Author
 
