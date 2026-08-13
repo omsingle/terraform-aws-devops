@@ -19,6 +19,7 @@ provider "aws" {
 module "network" {
   source = "./modules/network"
 
+  environment       = var.environment
   subnet_cidr       = var.subnet_cidr
   availability_zone = var.availability_zone
   vpc_cidr          = var.vpc_cidr
@@ -27,6 +28,7 @@ module "network" {
 module "compute" {
   source = "./modules/compute"
 
+  environment   = var.environment
   ami_id        = var.ami_id
   instance_type = var.instance_type
 
