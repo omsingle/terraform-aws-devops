@@ -15,20 +15,6 @@ pipeline {
             }
         }
 
-        stage('Debug Environment') {
-    steps {
-        sh '''
-            echo "=== PIPELINE CONTAINER ==="
-            hostname
-            echo "PID=$$"
-            echo "PPID=$PPID"
-
-            echo "Sleeping for 120 seconds..."
-            sleep 120
-        '''
-    }
-}
-
         stage('Terraform Format') {
             steps {
                 sh 'terraform fmt -check -recursive'
