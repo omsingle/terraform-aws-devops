@@ -15,6 +15,19 @@ pipeline {
             }
         }
 
+        stage('Debug Environment') {
+    steps {
+        sh '''
+            echo "USER=$(whoami)"
+            echo "PATH=$PATH"
+            echo "PWD=$PWD"
+            command -v terraform || true
+            ls -l /usr/bin/terraform
+            /usr/bin/terraform version
+        '''
+    }
+}
+
         stage('Terraform Format') {
             steps {
                 sh 'terraform fmt -check -recursive'
