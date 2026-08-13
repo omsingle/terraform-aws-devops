@@ -18,12 +18,24 @@ pipeline {
         stage('Debug Environment') {
     steps {
         sh '''
+            echo "=== SHELL PROCESS ==="
+            echo "PID=$$"
+            echo "PPID=$PPID"
             echo "USER=$(whoami)"
-            echo "PATH=$PATH"
-            echo "PWD=$PWD"
-            command -v terraform || true
-            ls -l /usr/bin/terraform
-            /usr/bin/terraform version
+            echo "HOSTNAME=$(hostname)"
+            echo "ROOT=$(readlink /proc/$$/root)"
+            echo "EXE=$(readlink /proc/$$/exe)"
+            echo
+
+            echo "=== FILESYSTEM ==="
+            ls -ld /
+            ls -ld /usr
+            ls -ld /usr/bin
+            ls -l /usr/bin/terraform || true
+            echo
+
+            echo "=== MOUNTS ==="
+            cat /proc/$$/mountinfo | head -20
         '''
     }
 }
