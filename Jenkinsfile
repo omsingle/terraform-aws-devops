@@ -36,10 +36,18 @@ pipeline {
         }
 
         stage('Terraform Init') {
-            steps {
-                sh 'terraform init'
-            }
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'aws-terraform',
+                usernameVariable: 'AWS_ACCESS_KEY_ID',
+                passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+            )
+        ]) {
+            sh 'terraform init'
         }
+    }
+}
 
         stage('Terraform Validate') {
             steps {
