@@ -75,5 +75,26 @@ pipeline {
                 }
             }
         }
+
+        stage('Destroy Approval') {
+            steps {
+                input message: 'Infrastructure is deployed. Destroy all Terraform-managed AWS resources?',
+                      ok: 'Destroy'
+            }
+        }
+
+        stage('Terraform Destroy') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'aws-terraform',
+                        usernameVariable: 'AWS_ACCESS_KEY_ID',
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
     }
 }
